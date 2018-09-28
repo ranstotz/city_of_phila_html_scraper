@@ -1,3 +1,28 @@
-references:
+File: readme
 
-https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3
+Company: City of Philadelphia
+Project: Take-Home Application 
+Position: Associate Software Engineer
+
+Author: Ryan Anstotz
+
+==============================================================================
+
+Build Instructions:
+
+1.) Pull the Github repository:
+    https://github.com/ranstotz/city_of_phila_html_scraper.git
+2.) Change the directory to be in the "source" directory.
+3.) Enter "make" into the command line to build the Docker
+    image (be sure to be in "source" directory).
+4.) "make" also places you inside the Docker container with
+    all necessary dependencies.
+5.) From there, enter "python3 html_scraper.py".
+6.) This runs the script and pulls the Account Number from
+    the config file (http_data.conf) in the same directory
+    as source in the container.
+7.) Unique files are written to the "out" directory.
+8.) See comments in source files for more details.
+9.) Dockerfile is located in "docker_build" directory.
+
+==============================================================================
