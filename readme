@@ -19,6 +19,8 @@ in the source directory.
 
 After the necessary data is parsed from the html of the associated account
 number, it is saved in a unique json file in the /source/out directory.
+There is a sample json file currently in the /source/out directory after
+executing the program once.
 
 A Dockerfile runs this API with build instructions below.
 
