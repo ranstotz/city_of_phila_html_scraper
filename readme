@@ -24,6 +24,8 @@ Build Instructions:
 7.) Unique files are written to the "out" directory.
 8.) See comments in source files for more details.
 9.) Dockerfile is located in "docker_build" directory.
+10.) If you would like to change the account number, please modify it in the
+    http_data.conf file in the "source" directory.
 
 ==============================================================================
 
@@ -33,3 +35,18 @@ DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
 DISTRIB_CODENAME=xenial
 DISTRIB_DESCRIPTION="Ubuntu 16.04.5 LTS"
+
+==============================================================================
+
+With the following Docker version:
+
+Docker version 18.06.1-ce, build e68fc7a
+
+==============================================================================
+
+And the following python3 version:
+
+Python 3.5.2
+
+# End of file
+
