@@ -26,3 +26,10 @@ Build Instructions:
 9.) Dockerfile is located in "docker_build" directory.
 
 ==============================================================================
+
+This code was designed and run on the following OS:
+
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.5 LTS"

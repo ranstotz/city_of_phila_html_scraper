@@ -6,7 +6,9 @@
 # Description:
 #  This Python program is designed to parse the HTML of the City of
 #  Philadelphia's Real Estate Lookup Application. All data is then written
-#  to a json file in a separate folder.
+#  to a json file in a separate folder. URL and Account No data is taken from
+#  an http_data.conf file in the same directory as this file. Please modify
+#  variables from there.
 #
 # =============================================================================
 
@@ -27,6 +29,9 @@ def main(argv):
     # Declare output directory file location for json output text files
     output = './out/'
     ext = '.json'
+
+    # set url timeout time
+    timeout_time = 10
     
     # Parse config file according to filename
     config_file = 'http_data.conf'
@@ -44,7 +49,6 @@ def main(argv):
 
     # set time limit on call to get url information/page data
     signal.signal(signal.SIGALRM, timeout_handler)
-    timeout_time = 10
     signal.alarm(timeout_time)
 
     # try to open url with the time constraint
@@ -66,7 +70,7 @@ def main(argv):
     try:
         # store table data from html using pandas library
         tables = pd.read_html(page.text)
-        
+    # raise exception
     except Exception:
         raise Exception("Account", account_no, " does not exist.")
     
@@ -74,9 +78,8 @@ def main(argv):
     temp_customer_data = tables[0]
     temp_real_estate_data = tables[1]
 
-    # get relevant customer data from parsing function
+    # get relevant customer and real estate data from parsing function
     customer_data = parse_customer_data(temp_customer_data)
-    
     real_estate_data = parse_real_estate_data(temp_real_estate_data)
 
     # generate unique filename for each account number search, encode
@@ -111,7 +114,8 @@ def get_config(config_file_a, header, variable):
         # in keys below. Store data to variables.
         data = config[header]
         config_variable = data[variable]
-        
+
+    # raise error if config cannot be parsed
     except:
         print('Error occurred in handline config file in "parse_config" function')
         exit(-1)
@@ -123,17 +127,19 @@ def get_config(config_file_a, header, variable):
 def timeout_handler(signum, frame):
     raise Exception("Url timed out. ")
 
-# get customer data in usable format from table (list of list pairs)
-# pass in panda's Data Frame object, return dict
+# function: get customer data in usable format from table 
+# (list of list pairs) pass in panda's Data Frame object, return dict
 def parse_customer_data(temp_customer_data_a):
 
+    # convert to dictionary
     temp_customer_data_a = temp_customer_data_a.to_dict()
     # store customer data to a list from the dict
     temp_customer_data_a = temp_customer_data_a[0][0]
-
+    # split by double space, this is due to existing formatting
     temp_customer_data_a = temp_customer_data_a.split('  ')
 
-    # loop over fields and separate data by colon
+    # loop over fields and separate data by colon, due to
+    # existing formatting
     customer_data_a = []
     for field in temp_customer_data_a:
         if ':' not in field:
@@ -141,6 +147,7 @@ def parse_customer_data(temp_customer_data_a):
         else:
             customer_data_a.append(field.split(':'))
 
+    # create ordered dict to store data
     cust_dict = collections.OrderedDict()
     for element in customer_data_a:
         cust_dict[element[0]] = element[1]
@@ -148,19 +155,20 @@ def parse_customer_data(temp_customer_data_a):
     # return dict of data
     return cust_dict
 
-# get real estate table data from table in usable format
+# function to get real estate table data from table in usable format
 # pass in panda's Data Frame object, return list of defaultdicts
 def parse_real_estate_data(real_estate_a):
 
     # set data frame to dictionary
     real_estate_a = real_estate_a.to_dict()
 
-    # open list and iterate through dictionary
+    # open list and iterate through nested dictionary
     # appending new dicts to a list and processing data
     real_estate_list = []
     for i in range(len(real_estate_a)):
         
         d = collections.defaultdict(list)
+        # due to formatting, headers are stored this way
         val = real_estate_a[i][0]
         
         for j in range(1, len(real_estate_a[i])-1):
@@ -171,20 +179,13 @@ def parse_real_estate_data(real_estate_a):
     # now get totals since diff format
     d = collections.defaultdict(list)
     val = real_estate_a[0][len(real_estate_a[0])-1]
+    # again the above and below is due to the formatting from tables
     for tot in range(1,len(real_estate_a)):
         d[val].append(real_estate_a[tot][len(real_estate_a[0])-1])
     real_estate_list.append(d)
 
     # return a list of defaultdict objects
     return real_estate_list
-    
-
-            
-
-
-
-        
-
 
 # =============================================================================
 
