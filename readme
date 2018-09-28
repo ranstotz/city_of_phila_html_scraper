@@ -8,6 +8,22 @@ Author: Ryan Anstotz
 
 ==============================================================================
 
+Description:
+
+This script functions as an HTTP API and pulls real estate tax data from:
+http://legacy.phila.gov/revenue/realestatetax/
+
+The tax data is scraped from the html of pages associated with BRT numbers
+(account numbers). These numbers are specified in the http_data.conf file
+in the source directory.
+
+After the necessary data is parsed from the html of the associated account
+number, it is saved in a unique json file in the /source/out directory.
+
+A Dockerfile runs this API with build instructions below.
+
+==============================================================================
+
 Build Instructions:
 
 1.) Pull the Github repository:
