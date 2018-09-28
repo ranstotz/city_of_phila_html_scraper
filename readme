@@ -26,6 +26,9 @@ Build Instructions:
 9.) Dockerfile is located in "docker_build" directory.
 10.) If you would like to change the account number, please modify it in the
     http_data.conf file in the "source" directory.
+11.) All output is saved in the /source/out directory in ".json" files.
+     A sample file exists the existing repository. Each filename is
+     unique and has the account number encoded prior to the extension.
 
 ==============================================================================
 
