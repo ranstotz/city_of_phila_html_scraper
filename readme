@@ -1,14 +1,6 @@
-File: readme
+# Philadelphia Real Estate Tax Scraper
 
-Company: City of Philadelphia
-Project: Take-Home Application 
-Position: Associate Software Engineer
-
-Author: Ryan Anstotz
-
-==============================================================================
-
-Description:
+## Description:
 
 This script functions as an HTTP API and pulls real estate tax data from:
 http://legacy.phila.gov/revenue/realestatetax/
@@ -22,11 +14,7 @@ number, it is saved in a unique json file in the /source/out directory.
 There is a sample json file currently in the /source/out directory after
 executing the program once.
 
-A Dockerfile runs this API with build instructions below.
-
-==============================================================================
-
-Build Instructions:
+## Build Instructions:
 
 1.) Pull the Github repository:
     https://github.com/ranstotz/city_of_phila_html_scraper.git
@@ -47,27 +35,4 @@ Build Instructions:
 11.) All output is saved in the /source/out directory in ".json" files.
      A sample file exists the existing repository. Each filename is
      unique and has the account number encoded prior to the extension.
-
-==============================================================================
-
-This code was designed and run on the following OS:
-
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=16.04
-DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION="Ubuntu 16.04.5 LTS"
-
-==============================================================================
-
-With the following Docker version:
-
-Docker version 18.06.1-ce, build e68fc7a
-
-==============================================================================
-
-And the following python3 version:
-
-Python 3.5.2
-
-# End of file
 
